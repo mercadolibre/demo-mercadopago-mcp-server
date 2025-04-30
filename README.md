@@ -45,23 +45,44 @@ A Model Context Protocol server that provides tools for integrating Mercado Pago
 
 ## Available Tools
 
+
 ### search_documentation
 Search through Mercado Pago's documentation.
 
-```typescript
-const result = await use_mcp_tool({
-  server_name: "mercadopago",
-  tool_name: "search_documentation",
-  arguments: {
-    language: "es",               // Language: 'es' or 'pt'
-    query: "checkout pro",
-    siteId: "MLA",               // Required: Site ID (e.g., MLB, MLA, MLM)
-    limit: 3                     // Optional: Maximum number of results (default: 10, max: 100)
-  }
-});
+#### Parameters
+- `language` (string, required)
+  - Documentation language
+  - Options: "es" (Spanish), "pt" (Portuguese)
+
+- `query` (string, required)
+  - Search term to find in documentation
+
+- `siteId` (string, required)
+  - Country site identifier
+  - Options: "MLB" (Brazil), "MLA" (Argentina), "MLM" (Mexico), "MLU" (Uruguay), "MLC" (Chile), "MCO" (Colombia), "MPE" (Peru)
+
+- `limit` (number, optional)
+  - Maximum number of results to return
+  - Default: 10
+  - Range: 1-100
+
+#### Example Request
+```xml
+<use_mcp_tool>
+<server_name>mercadopago</server_name>
+<tool_name>search_documentation</tool_name>
+<arguments>
+{
+  "language": "es",
+  "query": "checkout pro",
+  "siteId": "MLA",
+  "limit": 3
+}
+</arguments>
+</use_mcp_tool>
 ```
 
-Example response:
+#### Example response:
 ```markdown
 # Search Results for "checkout pro"
 Showing 3 of 8 results
